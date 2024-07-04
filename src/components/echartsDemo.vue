@@ -10,6 +10,16 @@
     ></MyChart>
     <button @click="changeRouter">切换路由</button>
     <button @click="close">切换加载状态</button>
+    <span>动态编辑图表：</span>
+    <el-select v-model="value" placeholder="请选择" @change="changeType(value)">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      >
+      </el-option>
+    </el-select>
   </div>
 </template>
 
@@ -41,14 +51,43 @@ export default {
         ]
       },
       chartData: [],
-      loading: true
+      loading: true,
+      // 设置默认type
+      chartType: "bar",
+      options: [
+        {
+          value: "pie",
+          label: "饼图"
+        },
+        {
+          value: "line",
+          label: "折线图"
+        },
+        {
+          value: "bar",
+          label: "柱状图"
+        }
+      ],
+      value: ""
     };
+  },
+  computed: {
+    // 动态设置type
+    dynamicType() {
+      return this.chartType === "bar" ? "bar" : "line";
+    }
+  },
+  watch: {
+    // 监听type的变化
+    dynamicType(newVal) {
+      this.chartOption.series[0].type = newVal;
+    }
   },
   created() {
     console.log("切换了");
-  },
-  mounted() {
     this.getxAxisData();
+    // 设置默认值
+    this.value = this.chartType;
   },
   methods: {
     itemClick(params) {
@@ -70,6 +109,47 @@ export default {
       this.$router.push(
         this.$router.currentRoute.path === "/edit" ? "detail" : "edit"
       );
+    },
+    changeType(value) {
+      if (value == "pie") {
+        this.chartOption = {
+          xAxis: {},
+          yAxis: {
+            type: "value"
+          },
+          series: [
+            {
+              name: "Access From",
+              type: "pie",
+              radius: "50%",
+              data: [
+                { value: 1048, name: "大桥1" },
+                { value: 735, name: "大桥2" },
+                { value: 580, name: "大桥3" },
+                { value: 484, name: "大桥4 " },
+                { value: 300, name: "大桥5" }
+              ]
+            }
+          ]
+        };
+      } else {
+        this.chartType = value;
+        this.chartOption = {
+          xAxis: {
+            type: "category",
+            data: []
+          },
+          yAxis: {
+            type: "value"
+          },
+          series: [
+            {
+              data: [120, 200, 150, 80, 70, 110, 130, 100],
+              type: "bar"
+            }
+          ]
+        };
+      }
     }
   }
 };
