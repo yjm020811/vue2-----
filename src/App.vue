@@ -12,6 +12,7 @@
     <myMap></myMap>
     <transitionDemo />
     <router-view :key="key"></router-view>
+    <propsDemo name="zhangsan" :age="18"></propsDemo>
   </div>
 </template>
 
@@ -26,6 +27,7 @@ import mixin from "./components/mixin";
 import myMap from "./components/myMap.vue";
 import svgIcon from "./components/svgIcon.vue";
 import transitionDemo from "./components/transitionDemo.vue";
+import propsDemo from './components/propsDemo.vue';
 
 export default {
   // mixins: [resize],
@@ -43,7 +45,8 @@ export default {
     echartsDemo,
     myMap,
     transitionDemo,
-    svgIcon
+    svgIcon,
+    propsDemo
   },
   mounted() {
     console.log(this.$refs);
