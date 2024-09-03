@@ -8,7 +8,6 @@
     <button @click="btnClick">父组件调用子组件中的方法</button>
     <Echarts></Echarts>
     <mixin></mixin>
-    <echartsDemo></echartsDemo>
     <myMap></myMap>
     <transitionDemo />
     <router-view :key="key"></router-view>
@@ -20,7 +19,6 @@
 import Add from "./components/Add";
 import Delete from "./components/Delete";
 import Echarts from "./components/Echarts";
-import echartsDemo from "./components/echartsDemo";
 import mixin from "./components/mixin";
 //数据大屏的适配
 // import resize from "./mixin/resize";
@@ -42,7 +40,6 @@ export default {
     Delete,
     Echarts,
     mixin,
-    echartsDemo,
     myMap,
     transitionDemo,
     svgIcon,

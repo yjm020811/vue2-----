@@ -5,19 +5,6 @@ Vue.use(Router);
 
 const routes = [
   {
-    path: "/",
-    component: () => import("@/components/echartsDemo.vue")
-  },
-  {
-    path: "/edit",
-    component: () => import("@/components/echartsDemo.vue")
-  },
-
-  {
-    path: "/detail",
-    component: () => import("@/components/echartsDemo.vue")
-  },
-  {
     path: "/excel",
     component: () => import("@/views/myExcel.vue")
   }
